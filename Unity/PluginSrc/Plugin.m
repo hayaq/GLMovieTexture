@@ -15,11 +15,11 @@ uint64_t _Load(const char *name,uint32_t textureId){
 		DUMP("Failed to find movie '%s'",name);
 		return 0;
 	}
-	GLMovieTexture *instance = [[GLMovieTexture alloc] init];
-	[instance setGLContext:[EAGLContext currentContext]];
-	[instance setMovie:path];
-	[instance setTargetTextureId:textureId];
-	[instance setCurrentTime:3.0];
+	NSLog(@"%@",path);
+	EAGLContext *context = [EAGLContext currentContext];
+	GLMovieTexture *instance = [[GLMovieTexture alloc] initWithMovie:path
+															 context:context];
+	[instance setTextureId:textureId];
 	DUMP("Load(%s,%d)",name,textureId);
 	return (uint64_t)(uintptr_t)instance;
 }
@@ -73,23 +73,60 @@ void _SetLoop(uint64_t instanceId,uint8_t loop){
 	instance.loop = (BOOL)loop;
 }
 
+uint8_t _IsPlaying(uint64_t instanceId){
+	if( instanceId==0 ){ return 0; }
+	GLMovieTexture *instance = GetInstance(instanceId);
+	return (uint8_t)instance.isPlaying;
+}
+
+
 //////////////////////////////////////////
 
 static int FindEmbedData(FILE *fp,const char *chunkId);
 
-static NSString* GetMoviePath(const char *name){
+static NSString* GetMoviePath(const char *name)
+{
+	NSString *moviePath = nil;
+	NSString *movieName = [NSString stringWithUTF8String:name];
+	if( [movieName hasPrefix:@"http://"] || [movieName hasPrefix:@"https://"] ){
+		return movieName;
+	}
 	NSString *basePath = [NSString stringWithFormat:@"%@/Data/Raw/%s",[[NSBundle mainBundle] resourcePath],name];
-	NSString *path = [basePath stringByAppendingPathExtension:@"mov"];
-	if( [[NSFileManager defaultManager] fileExistsAtPath:path] ){
-		return path;
+	NSString *ext = [movieName pathExtension];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if( [ext isEqual:@""] ){
+		NSString *path = [basePath stringByAppendingPathExtension:@"mov"];
+		if( [fm fileExistsAtPath:path] ){
+			return path;
+		}
+		path = [basePath stringByAppendingPathExtension:@"m4v"];
+		if( [fm fileExistsAtPath:path] ){
+			return path;
+		}
+		path = [basePath stringByAppendingPathExtension:@"mp4"];
+		if( [fm fileExistsAtPath:path] ){
+			return path;
+		}
+		path = [basePath stringByAppendingPathExtension:@"png"];
+		if( ![fm fileExistsAtPath:path] ){
+			return nil;
+		}
+		basePath = path;
+	}else{
+		if( [ext caseInsensitiveCompare:@"mov"]==0 || [ext caseInsensitiveCompare:@"m4v"]==0 ||  [ext caseInsensitiveCompare:@"mp4"]==0){
+			if( [fm fileExistsAtPath:basePath] ){
+				return basePath;
+			}
+			return nil;
+		}
+		if( [ext caseInsensitiveCompare:@"png"]!=0 || ![fm fileExistsAtPath:basePath] ){
+			return nil;
+		}
+		movieName = [movieName stringByDeletingPathExtension];
 	}
-	path = [basePath stringByAppendingPathExtension:@"png"];
-	if( ![[NSFileManager defaultManager] fileExistsAtPath:path] ){
-		return nil;
-	}
-	NSString *moviePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%s.mov",name]];
+	moviePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",movieName]];
 	
-	FILE *fp = fopen([path UTF8String],"rb");
+	FILE *fp = fopen([basePath UTF8String],"rb");
 	
 	int length = FindEmbedData(fp,EMBEDED_MOVIE_CHUNK_ID);
 	if( length <= 0 ){

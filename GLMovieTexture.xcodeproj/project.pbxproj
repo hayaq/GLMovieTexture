@@ -10,11 +10,19 @@
 		4A029A391685E2DA00761BD9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A029A381685E2DA00761BD9 /* UIKit.framework */; };
 		4A029A3B1685E2DA00761BD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A029A3A1685E2DA00761BD9 /* Foundation.framework */; };
 		4A029A3D1685E2DA00761BD9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A029A3C1685E2DA00761BD9 /* CoreGraphics.framework */; };
+		4A0C06E31689B37D004995F9 /* Movie.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 4A0C06E11689B35B004995F9 /* Movie.m4v */; };
 		4A276A571685E407008E026D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A276A561685E407008E026D /* AVFoundation.framework */; };
 		4A276A591685E40C008E026D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A276A581685E40C008E026D /* CoreMedia.framework */; };
 		4A276A5B1685E41F008E026D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A276A5A1685E41F008E026D /* CoreVideo.framework */; };
+		4A363F34168BF3FC00FC94EC /* AVAssetMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F31168BF3FC00FC94EC /* AVAssetMovieDecoder.m */; };
+		4A363F35168BF3FC00FC94EC /* AVAssetMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F31168BF3FC00FC94EC /* AVAssetMovieDecoder.m */; };
+		4A363F36168BF3FC00FC94EC /* MovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F33168BF3FC00FC94EC /* MovieDecoder.m */; };
+		4A363F37168BF3FC00FC94EC /* MovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F33168BF3FC00FC94EC /* MovieDecoder.m */; };
+		4A363F3E168C0A6700FC94EC /* QCStopWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F3D168C0A6600FC94EC /* QCStopWatch.m */; };
+		4A363F3F168C0A6700FC94EC /* QCStopWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F3D168C0A6600FC94EC /* QCStopWatch.m */; };
+		4A363F41168C16C900FC94EC /* AVPlayerMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F40168C16C900FC94EC /* AVPlayerMovieDecoder.m */; };
+		4A363F42168C16C900FC94EC /* AVPlayerMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F40168C16C900FC94EC /* AVPlayerMovieDecoder.m */; };
 		4A3C478216877FCC006E119A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C476116877FCC006E119A /* AppDelegate.m */; };
-		4A3C478316877FCC006E119A /* Movie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4A3C476316877FCC006E119A /* Movie.mov */; };
 		4A3C478416877FCC006E119A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3C476416877FCC006E119A /* Default-568h@2x.png */; };
 		4A3C478516877FCC006E119A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3C476516877FCC006E119A /* Default.png */; };
 		4A3C478616877FCC006E119A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3C476616877FCC006E119A /* Default@2x.png */; };
@@ -30,12 +38,8 @@
 		4A3C4B8916878176006E119A /* GLFBOTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B7F16878176006E119A /* GLFBOTexture.m */; };
 		4A3C4B8A16878176006E119A /* GLMovieTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8116878176006E119A /* GLMovieTexture.m */; };
 		4A3C4B8B16878176006E119A /* GLMovieTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8116878176006E119A /* GLMovieTexture.m */; };
-		4A3C4B8C16878176006E119A /* GLYUVRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLYUVRenderer.m */; };
-		4A3C4B8D16878176006E119A /* GLYUVRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLYUVRenderer.m */; };
-		4A3C4B8E16878176006E119A /* MovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8516878176006E119A /* MovieDecoder.m */; };
-		4A3C4B8F16878176006E119A /* MovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8516878176006E119A /* MovieDecoder.m */; };
-		4A3C4B9016878176006E119A /* QCStopWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8716878176006E119A /* QCStopWatch.m */; };
-		4A3C4B9116878176006E119A /* QCStopWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8716878176006E119A /* QCStopWatch.m */; };
+		4A3C4B8C16878176006E119A /* GLImageShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLImageShader.m */; };
+		4A3C4B8D16878176006E119A /* GLImageShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLImageShader.m */; };
 		4A80031F1685F80F00E969C7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A80031E1685F80F00E969C7 /* OpenGLES.framework */; };
 		4A8003211685F81400E969C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8003201685F81400E969C7 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -57,12 +61,19 @@
 		4A029A381685E2DA00761BD9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4A029A3A1685E2DA00761BD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A029A3C1685E2DA00761BD9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4A0C06E11689B35B004995F9 /* Movie.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movie.m4v; sourceTree = "<group>"; };
 		4A276A561685E407008E026D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4A276A581685E40C008E026D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4A276A5A1685E41F008E026D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		4A363F31168BF3FC00FC94EC /* AVAssetMovieDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVAssetMovieDecoder.m; sourceTree = "<group>"; };
+		4A363F32168BF3FC00FC94EC /* MovieDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDecoder.h; sourceTree = "<group>"; };
+		4A363F33168BF3FC00FC94EC /* MovieDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDecoder.m; sourceTree = "<group>"; };
+		4A363F38168BF95800FC94EC /* MovieDecoderInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDecoderInternal.h; sourceTree = "<group>"; };
+		4A363F3C168C0A6600FC94EC /* QCStopWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCStopWatch.h; sourceTree = "<group>"; };
+		4A363F3D168C0A6600FC94EC /* QCStopWatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCStopWatch.m; sourceTree = "<group>"; };
+		4A363F40168C16C900FC94EC /* AVPlayerMovieDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerMovieDecoder.m; sourceTree = "<group>"; };
 		4A3C476016877FCC006E119A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4A3C476116877FCC006E119A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4A3C476316877FCC006E119A /* Movie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Movie.mov; sourceTree = "<group>"; };
 		4A3C476416877FCC006E119A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4A3C476516877FCC006E119A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4A3C476616877FCC006E119A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -83,12 +94,8 @@
 		4A3C4B7F16878176006E119A /* GLFBOTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLFBOTexture.m; sourceTree = "<group>"; };
 		4A3C4B8016878176006E119A /* GLMovieTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMovieTexture.h; sourceTree = "<group>"; };
 		4A3C4B8116878176006E119A /* GLMovieTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMovieTexture.m; sourceTree = "<group>"; };
-		4A3C4B8216878176006E119A /* GLYUVRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLYUVRenderer.h; sourceTree = "<group>"; };
-		4A3C4B8316878176006E119A /* GLYUVRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYUVRenderer.m; sourceTree = "<group>"; };
-		4A3C4B8416878176006E119A /* MovieDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDecoder.h; sourceTree = "<group>"; };
-		4A3C4B8516878176006E119A /* MovieDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDecoder.m; sourceTree = "<group>"; };
-		4A3C4B8616878176006E119A /* QCStopWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCStopWatch.h; sourceTree = "<group>"; };
-		4A3C4B8716878176006E119A /* QCStopWatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCStopWatch.m; sourceTree = "<group>"; };
+		4A3C4B8316878176006E119A /* GLImageShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLImageShader.m; sourceTree = "<group>"; };
+		4A45F53E168C57BE00569742 /* GLImageShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLImageShader.h; sourceTree = "<group>"; };
 		4A80031E1685F80F00E969C7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4A8003201685F81400E969C7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -155,6 +162,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4A363F30168BF3FC00FC94EC /* MovieDecoder */ = {
+			isa = PBXGroup;
+			children = (
+				4A363F32168BF3FC00FC94EC /* MovieDecoder.h */,
+				4A363F38168BF95800FC94EC /* MovieDecoderInternal.h */,
+				4A363F33168BF3FC00FC94EC /* MovieDecoder.m */,
+				4A363F31168BF3FC00FC94EC /* AVAssetMovieDecoder.m */,
+				4A363F40168C16C900FC94EC /* AVPlayerMovieDecoder.m */,
+				4A363F3C168C0A6600FC94EC /* QCStopWatch.h */,
+				4A363F3D168C0A6600FC94EC /* QCStopWatch.m */,
+			);
+			path = MovieDecoder;
+			sourceTree = "<group>";
+		};
 		4A3C475F16877FCC006E119A /* GLMovieTextureTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +193,7 @@
 		4A3C476216877FCC006E119A /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4A3C476316877FCC006E119A /* Movie.mov */,
+				4A0C06E11689B35B004995F9 /* Movie.m4v */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -210,12 +231,9 @@
 				4A3C4B7F16878176006E119A /* GLFBOTexture.m */,
 				4A3C4B8016878176006E119A /* GLMovieTexture.h */,
 				4A3C4B8116878176006E119A /* GLMovieTexture.m */,
-				4A3C4B8216878176006E119A /* GLYUVRenderer.h */,
-				4A3C4B8316878176006E119A /* GLYUVRenderer.m */,
-				4A3C4B8416878176006E119A /* MovieDecoder.h */,
-				4A3C4B8516878176006E119A /* MovieDecoder.m */,
-				4A3C4B8616878176006E119A /* QCStopWatch.h */,
-				4A3C4B8716878176006E119A /* QCStopWatch.m */,
+				4A45F53E168C57BE00569742 /* GLImageShader.h */,
+				4A3C4B8316878176006E119A /* GLImageShader.m */,
+				4A363F30168BF3FC00FC94EC /* MovieDecoder */,
 			);
 			path = GLMovieTexture;
 			sourceTree = "<group>";
@@ -306,12 +324,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A3C478316877FCC006E119A /* Movie.mov in Resources */,
 				4A3C478416877FCC006E119A /* Default-568h@2x.png in Resources */,
 				4A3C478516877FCC006E119A /* Default.png in Resources */,
 				4A3C478616877FCC006E119A /* Default@2x.png in Resources */,
 				4A3C478716877FCC006E119A /* InfoPlist.strings in Resources */,
 				4A3C478816877FCC006E119A /* ViewController.xib in Resources */,
+				4A0C06E31689B37D004995F9 /* Movie.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,9 +364,11 @@
 				4A3C479316877FCC006E119A /* ViewController.m in Sources */,
 				4A3C4B8816878176006E119A /* GLFBOTexture.m in Sources */,
 				4A3C4B8A16878176006E119A /* GLMovieTexture.m in Sources */,
-				4A3C4B8C16878176006E119A /* GLYUVRenderer.m in Sources */,
-				4A3C4B8E16878176006E119A /* MovieDecoder.m in Sources */,
-				4A3C4B9016878176006E119A /* QCStopWatch.m in Sources */,
+				4A3C4B8C16878176006E119A /* GLImageShader.m in Sources */,
+				4A363F34168BF3FC00FC94EC /* AVAssetMovieDecoder.m in Sources */,
+				4A363F36168BF3FC00FC94EC /* MovieDecoder.m in Sources */,
+				4A363F3E168C0A6700FC94EC /* QCStopWatch.m in Sources */,
+				4A363F41168C16C900FC94EC /* AVPlayerMovieDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,9 +379,11 @@
 				4A3C4B77168780FF006E119A /* Plugin.m in Sources */,
 				4A3C4B8916878176006E119A /* GLFBOTexture.m in Sources */,
 				4A3C4B8B16878176006E119A /* GLMovieTexture.m in Sources */,
-				4A3C4B8D16878176006E119A /* GLYUVRenderer.m in Sources */,
-				4A3C4B8F16878176006E119A /* MovieDecoder.m in Sources */,
-				4A3C4B9116878176006E119A /* QCStopWatch.m in Sources */,
+				4A3C4B8D16878176006E119A /* GLImageShader.m in Sources */,
+				4A363F35168BF3FC00FC94EC /* AVAssetMovieDecoder.m in Sources */,
+				4A363F37168BF3FC00FC94EC /* MovieDecoder.m in Sources */,
+				4A363F3F168C0A6700FC94EC /* QCStopWatch.m in Sources */,
+				4A363F42168C16C900FC94EC /* AVPlayerMovieDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +463,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLMovieTextureTest/GLMovieTextureTest-Prefix.pch";
 				INFOPLIST_FILE = "GLMovieTextureTest/GLMovieTextureTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -452,6 +475,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLMovieTextureTest/GLMovieTextureTest-Prefix.pch";
 				INFOPLIST_FILE = "GLMovieTextureTest/GLMovieTextureTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -512,6 +536,7 @@
 				4A3C47B416878098006E119A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

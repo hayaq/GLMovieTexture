@@ -8,6 +8,7 @@
 	uint32_t _textureId;
 	int      _width;
 	int      _height;
+	uint32_t _selfAllocatedTextureId;
 }
 @end
 
@@ -31,6 +32,7 @@
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _textureId, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, 0, 0);
+	_selfAllocatedTextureId = 0;
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if( status!=GL_FRAMEBUFFER_COMPLETE ){
 		NSLog(@"Failed to create framebuffer object (%d)",status);
@@ -56,6 +58,7 @@
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _textureId, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, 0, 0);
+	_selfAllocatedTextureId =  _textureId;
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if( status!=GL_FRAMEBUFFER_COMPLETE ){
 		NSLog(@"Failed to create framebuffer object (%d)",status);
@@ -67,15 +70,19 @@
 }
 
 - (void)dealloc{
-    glDeleteFramebuffers(1, &_fboId);
-	glDeleteTextures(1,&_textureId);
+	if( _fboId ){
+		glDeleteFramebuffers(1, &_fboId);
+	}
+	if( _selfAllocatedTextureId ){
+		glDeleteTextures(1,&_selfAllocatedTextureId);
+	}
     [super dealloc];
 }
 
 -(void)bind{
 	glBindFramebuffer(GL_FRAMEBUFFER, _fboId);
     glViewport(0, 0, _width, _height);
-    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

@@ -18,6 +18,7 @@
 	GLES2View      *glView;
 	GLMovieTexture *movieTexture;
 	GLTexShader    *shader;
+	uint32_t        targetTextureId;
 }
 @end
 
@@ -32,8 +33,13 @@
 	
 	shader = [[GLTexShader alloc] init];
 	
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"Movie" ofType:@"mov"];
+	targetTextureId = [glView createTexture];
+	
+	//NSString *path = [[NSBundle mainBundle] pathForResource:@"Movie" ofType:@"m4v"];
+	NSString *path = @"http://dl.dropbox.com/u/60595275/Movie.m4v";
 	movieTexture = [[GLMovieTexture alloc] initWithMovie:path context:glView.glContext];
+	[movieTexture setTextureId:targetTextureId];
+	[movieTexture setLoop:YES];
 	[movieTexture play];
 	
 	CADisplayLink *displayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(displayCallback:)];
@@ -45,17 +51,17 @@
 	[glView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
--(void)displayCallback:(CADisplayLink*)displayLink{
+-(void)displayCallback:(CADisplayLink*)displayLink
+{
 	[glView beginRendering];
 	
 	[self adjustViewport];
 	
 	const float v[8] = { -1, -1, +1, -1, +1, +1, -1, +1 };
-	const float t[8] = {  0,  1,  1,  1,  1,  0,  0,  0 };
+	const float t[8] = {  0,  0,  1,  0,  1,  1,  0,  1 };
 		
 	[shader bind];
-	[shader setTexture:movieTexture.textureId atIndex:0];
-	[shader setTexture:movieTexture.subTextureId atIndex:1];
+	[shader setTexture:targetTextureId atIndex:0];
 	glEnableVertexAttribArray(shader.position);
 	glEnableVertexAttribArray(shader.texcoord);
 	glVertexAttribPointer(shader.position, 2, GL_FLOAT, 0, 0, v);
