@@ -1,4 +1,4 @@
 GLMovieTexture
 ==============
 
-* OpenGL ES2 movie texture using AVAssetReader
+* OpenGL ES2 movie texture using AVAssetReader ( AVPlayerItemVideoOutput on iOS6 )
