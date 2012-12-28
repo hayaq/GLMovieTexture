@@ -35,7 +35,6 @@ typedef struct{
 	void    *data;
 }GLTextureInfo;
 
-
 @interface GLMovieTexture () <MovieDecoderDelegate>{
 	uint32_t       _targetTextureId;
 	uint32_t       _texNum;
@@ -75,7 +74,6 @@ typedef struct{
 	[self setMovie:path];
 	return self;
 }
-
 
 - (void)dealloc{
 	[_decoder stop];

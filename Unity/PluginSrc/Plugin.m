@@ -15,12 +15,12 @@ uint64_t _Load(const char *name,uint32_t textureId){
 		DUMP("Failed to find movie '%s'",name);
 		return 0;
 	}
-	NSLog(@"%@",path);
+	DUMP("Load(%s,%d)",name,textureId);
+	
 	EAGLContext *context = [EAGLContext currentContext];
 	GLMovieTexture *instance = [[GLMovieTexture alloc] initWithMovie:path
 															 context:context];
 	[instance setTextureId:textureId];
-	DUMP("Load(%s,%d)",name,textureId);
 	return (uint64_t)(uintptr_t)instance;
 }
 
