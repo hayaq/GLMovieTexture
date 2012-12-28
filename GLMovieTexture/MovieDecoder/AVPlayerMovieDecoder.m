@@ -35,7 +35,6 @@
 	_player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDidFinishDecoding:)
 												 name:AVPlayerItemDidPlayToEndTimeNotification object:item];
-	
 	[_lock unlock];
 	return TRUE;
 }
