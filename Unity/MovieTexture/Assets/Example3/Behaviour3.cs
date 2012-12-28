@@ -6,7 +6,7 @@ public class Behaviour3 : MonoBehaviour {
 	GLMovieTextureObject _mto;
 	
 	void Start(){
-		LoadMovieTexture("Movie.m4v");
+		LoadMovieTexture("Movie2.m4v");
 	}
 	
 	void OnDestroy(){

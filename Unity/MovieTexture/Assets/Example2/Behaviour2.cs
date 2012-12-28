@@ -18,7 +18,7 @@ public class Behaviour2 : MonoBehaviour {
 		if( GUI.Button(new Rect(0,by,bw,bh),"Local") ){
 			LoadMovieTexture("Movie2.m4v");
 		}else if( GUI.Button(new Rect(bw,by,bw,bh),"Streaming") ){
-			LoadMovieTexture("http://dl.dropbox.com/u/60595275/Movie.m4v");
+			LoadMovieTexture("http://github.id0.jp/GLMovieTexture/Movie.m4v");
 		}else if( GUI.Button(new Rect(2*bw,by,bw,bh),"Delete") ){
 			if( _mto != null ){
 				Destroy(_mto);
