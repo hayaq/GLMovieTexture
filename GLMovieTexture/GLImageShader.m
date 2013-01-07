@@ -5,23 +5,19 @@
 //  Created by hayashi on 12/23/12.
 //  Copyright (c) 2012 hayashi. All rights reserved.
 //
-
 #import "GLImageShader.h"
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#define IS_GLES (1)
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import <CoreGraphics/CoreGraphics.h>
+#else
+#define IS_GLES (0)
+#import <OpenGL/gl.h>
+#endif
 
 #define GLSL(src) #src
-
-@interface GLImageShader(){
-	uint32_t _programId;
-	int      _position;
-	int      _texcoord;
-	int      _scale;
-	int      _texNum;
-	int      _textures[16];
-}
-@end
 
 @implementation GLImageShader
 
@@ -147,7 +143,8 @@
 				 gl_Position = position;
 				 v_TexCoord = texcoord*scale;
 			 }
-			 ),
+		),
+#if IS_GLES
 		GLSL(
 			 precision lowp float;
 			 varying lowp vec2 v_TexCoord;
@@ -158,7 +155,19 @@
 			 void main(){
 				 gl_FragColor.rgb = (m*vec3(texture2D(_MainTex,v_TexCoord).r,texture2D(_SubTex1,v_TexCoord).ra)+t);
 			 }
-			 )
+		)
+#else
+		GLSL(
+			 varying vec2 v_TexCoord;
+			 uniform sampler2D _MainTex;
+			 uniform sampler2D _SubTex1;
+			 const mat3 m = mat3(1.0,1.0,1.0, 0.0,-0.344,1.772, 1.402,-0.714,0.0 );
+			 const vec3 t = vec3(-0.701,0.529,-0.886);
+			 void main(){
+				 gl_FragColor.rgb = (m*vec3(texture2D(_MainTex,v_TexCoord).r,texture2D(_SubTex1,v_TexCoord).ra)+t);
+			 }
+		)
+#endif
 	};
 	return [self loadShaders:(const char**)src];
 }
@@ -180,6 +189,7 @@
 				 v_TexCoord = texcoord*scale;
 			 }
 			 ),
+#if IS_GLES
 		GLSL(
 			 precision lowp float;
 			 varying lowp vec2 v_TexCoord;
@@ -187,9 +197,19 @@
 			 void main(){
 				 gl_FragColor = texture2D(_MainTex,v_TexCoord).bgra;
 			 }
-			 )
+		)
+#else
+		GLSL(
+			 varying vec2 v_TexCoord;
+			 uniform sampler2D _MainTex;
+			 void main(){
+				 gl_FragColor = texture2D(_MainTex,v_TexCoord).bgra;
+			 }
+		)
+#endif
 	};
 	return [self loadShaders:(const char**)src];
 }
 
 @end
+

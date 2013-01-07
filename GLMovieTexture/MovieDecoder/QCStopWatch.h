@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QCStopWatch : NSObject
+@interface QCStopWatch : NSObject{
+	uint64_t _time0;
+	uint64_t _sumt;
+	int _count;
+	int _sampleCount;
+}
 +(id)stopWatchWithSampleCount:(int)sampleCount;
 -(void)start;
 -(void)stop;

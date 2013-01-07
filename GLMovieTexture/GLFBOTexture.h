@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface GLFBOTexture : NSObject
+@interface GLFBOTexture : NSObject{
+	uint32_t _fboId;
+	uint32_t _textureId;
+	int      _width;
+	int      _height;
+	uint32_t _selfAllocatedTextureId;
+}
 @property (readonly) uint32_t fboId;
 @property (readonly) uint32_t textureId;
 -(id)initWithTextureId:(uint32_t)textureId size:(CGSize)size;

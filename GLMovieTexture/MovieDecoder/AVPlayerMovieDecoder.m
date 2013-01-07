@@ -2,12 +2,6 @@
 #import "MovieDecoderInternal.h"
 #import <AVFoundation/AVPlayerItemOutput.h>
 
-@interface AVPlayerMovieDecoder (){
-	AVPlayer *_player;
-	AVPlayerItemVideoOutput *_output;
-}
-@end
-
 @implementation AVPlayerMovieDecoder
 
 +(BOOL)isAvailable{
@@ -19,7 +13,7 @@
 
 -(BOOL)loadMovie:(NSString*)path
 {
-	[_lock lock];
+	[_data->_lock lock];
 	NSURL *url = nil;
 	if( [path hasPrefix:@"http://"] || [path hasPrefix:@"https://"] ){
 		url = [NSURL URLWithString:path];
@@ -30,20 +24,19 @@
 	}
 	AVPlayerItem* item = [AVPlayerItem playerItemWithURL:url];
 	_player = [[AVPlayer playerWithPlayerItem:item] retain];
-	_width = _displayWidth = _height = 0;
 	
 	_player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDidFinishDecoding:)
 												 name:AVPlayerItemDidPlayToEndTimeNotification object:item];
-	[_lock unlock];
+	[_data->_lock unlock];
 	return TRUE;
 }
 
 -(void)dealloc{
-	[_lock lock];
+	[_data->_lock lock];
 	[_output release];
 	[_player release];
-	[_lock unlock];
+	[_data->_lock unlock];
 	[super dealloc];
 }
 
@@ -57,7 +50,7 @@
 
 -(void)initReader{
 	[self releaseReader];
-	NSDictionary *setting = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_format]
+	NSDictionary *setting = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_data->_format]
 														forKey:(id)@"PixelFormatType"];	
 	_output = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:setting];
 	[_player.currentItem addOutput:_output];
@@ -98,7 +91,7 @@
 	if( duration <= 0 || isnan(duration) ){
 		return;
 	}
-	if( _initFlag ){
+	if( _data->_initFlag ){
 		if( [self bufferedTime] < (duration*0.9f) ){
 			if( _player.rate > 0.f ){
 				[_player pause];
@@ -117,14 +110,14 @@
 -(void)decodeFrame:(CMTime)tm{
 	CVPixelBufferRef pixBuff = [_output copyPixelBufferForItemTime:tm itemTimeForDisplay:NULL];
 	if( !pixBuff ){ return; }
-	_currentTime = CMTimeGetSeconds(tm);
-	[_delegate movieDecoderDidDecodeFrame:self pixelBuffer:pixBuff];
+	_data->_currentTime = CMTimeGetSeconds(tm);
+	[_data->_delegate movieDecoderDidDecodeFrame:self pixelBuffer:pixBuff];
 	CVPixelBufferRelease(pixBuff);
 }
 
 -(void)movieDidFinishDecoding:(NSNotification*)nf{
-	[_delegate movieDecoderDidFinishDecoding:self];
-	if( _loop ){
+	[_data->_delegate movieDecoderDidFinishDecoding:self];
+	if( _data->_loop ){
 		[_player seekToTime:kCMTimeZero];
 		[_player play];
 	}else{
@@ -150,5 +143,3 @@
 }
 
 @end
-
-

@@ -1,16 +1,15 @@
 #import "MovieDecoder.h"
 #import "MovieDecoderInternal.h"
 
+#define synthesize_getter(t,p) -(t)p{ return _data->_##p; }
+
 @implementation MovieDecoder
 
-@synthesize width = _width;
-@synthesize height = _height;
-@synthesize format = _format;
-@synthesize displayWidth = _displayWidth;
-@synthesize frameRate = _frameRate;
-@synthesize currentTime = _currentTime;
-@synthesize loop = _loop;
-@synthesize delegate = _delegate;
+synthesize_getter(int,format)
+synthesize_getter(int,frameRate)
+synthesize_getter(double,currentTime)
+synthesize_getter(BOOL,loop)
+synthesize_getter(id<MovieDecoderDelegate>,delegate)
 
 -(id)init{
 	self = [super init];
@@ -18,30 +17,52 @@
 	return self;
 }
 
--(id)initWithMovie:(NSString*)path format:(int)format
-{
+-(id)initWithMovie:(NSString*)path format:(int)format{
 	self = [super init];
 	[self init_];
-	_format = format;
+	_data->_format = format;
 	[self loadMovie:path];
 	return self;
 }
 
 -(void)init_{
-	_lock = [[NSRecursiveLock alloc] init];
-	_stopWatch = [[QCStopWatch stopWatchWithSampleCount:100] retain];
-	_format = kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange;
-	_frameRate = 30;
+	_data = (MovieDecoderData*)malloc(sizeof(MovieDecoderData));
+	memset(_data, 0, sizeof(MovieDecoderData));
+	_data->_lock = [[NSRecursiveLock alloc] init];
+	_data->_stopWatch = [[QCStopWatch stopWatchWithSampleCount:100] retain];
+	_data->_format = kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange;
+	_data->_frameRate = 30;
 }
 
-- (void)dealloc
-{
-	[_lock lock];
-	[_timer invalidate];
-	[_stopWatch release];
-	[_lock unlock];
-	[_lock release];
+-(void)dealloc{
+	[_data->_lock lock];
+	NSRecursiveLock *lock = _data->_lock;
+	[_data->_timer invalidate];
+	[_data->_stopWatch release];
+	free(_data);
+	[lock unlock];
+	[lock release];
     [super dealloc];
+}
+
+-(void)setLoop:(BOOL)loop{
+	_data->_loop = loop;
+}
+
+-(void)setDelegate:(id<MovieDecoderDelegate>)delegate{
+	_data->_delegate = delegate;
+}
+
+-(void)setCurrentTime:(double)currentTime{
+	_data->_currentTime = currentTime;
+}
+
+-(void)setFormat:(int)format{
+	_data->_format = format;
+}
+
+-(void)setFrameRate:(int)frameRate{
+	_data->_frameRate = frameRate;
 }
 
 -(BOOL)loadMovie:(NSString*)path{
@@ -49,52 +70,51 @@
 }
 
 -(void)start{
-	[_lock lock];
+	[_data->_lock lock];
 	if( [self isRunning] ){
-		[_lock unlock];
+		[_data->_lock unlock];
 		return;
 	}
-	_initFlag = NO;
+	_data->_initFlag = NO;
 	[self preprocessForDecoding];
-	_timer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_frameRate)
+	_data->_timer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_data->_frameRate)
 											  target:self
 											selector:@selector(captureLoop)
 											userInfo:nil repeats:YES];
-	[_lock unlock];
+	[_data->_lock unlock];
 }
 
 -(void)pause{
-	[_lock lock];
+	[_data->_lock lock];
 	if( ![self isRunning] ){
-		[_lock unlock];
+		[_data->_lock unlock];
 		return;
 	}
-	[_timer invalidate];
-	_timer = nil;
+	[_data->_timer invalidate];
+	_data->_timer = nil;
 	[self processForPausing];
-	[_lock unlock];
+	[_data->_lock unlock];
 }
 
 -(void)stop{
-	[_lock lock];
-	_currentTime  = 0;
-	[_timer invalidate];
-	_timer = nil;
+	[_data->_lock lock];
+	_data->_currentTime  = 0;
+	[_data->_timer invalidate];
+	_data->_timer = nil;
 	[self postprocessForDecoding];
-	[_lock unlock];
+	[_data->_lock unlock];
 }
 
 -(void)captureLoop{
-	[_stopWatch start];
+	//[_data->_stopWatch start];
 	[self captureNext];
-	[_stopWatch stop];
-	//NSLog(@"capture: %f",_currentTime);
+	//[_data->_stopWatch stop];
 }
 
 -(void)captureNext{
-	[_lock lock];
+	[_data->_lock lock];
 	[self processForDecoding];
-	[_lock unlock];
+	[_data->_lock unlock];
 }
 
 -(BOOL)isFinished{
@@ -102,7 +122,7 @@
 }
 
 -(BOOL)isRunning{
-	return [_timer isValid]? YES : NO;
+	return [_data->_timer isValid]? YES : NO;
 }
 
 -(void)preprocessForDecoding{}
@@ -135,6 +155,4 @@
 	return [[decoder initWithMovie:path format:format] autorelease];
 }
 
-
 @end
-

@@ -7,18 +7,19 @@
 //
 #import "GLMovieTexture.h"
 #import "MovieDecoder.h"
-#import "GLImageShader.h"
 #import "GLFBOTexture.h"
-#import <QuartzCore/QuartzCore.h>
+#import "GLImageShader.h"
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-#import <CoreVideo/CoreVideo.h>
-
-//#define DECODE_FORMAT '420f'
 #define DECODE_FORMAT '420v'
-//#define DECODE_FORMAT 'BGRA'
-
 #define USE_GL_TEXTURE_CACHE (1)
+#elif TARGET_OS_MAC
+#import <OpenGL/gl.h>
+#define DECODE_FORMAT 'BGRA'
+#define USE_GL_TEXTURE_CACHE (0)
+#endif
 
 // (iPhone5)
 // '420v' '420f' : 3.8msec
@@ -29,30 +30,7 @@
 // '420f' : 70msec!!!
 // 'BGRA' : 18msec
 
-typedef struct{
-	uint32_t textureId;
-	uint32_t format;
-	void    *data;
-}GLTextureInfo;
-
-@interface GLMovieTexture () <MovieDecoderDelegate>{
-	uint32_t       _targetTextureId;
-	uint32_t       _texNum;
-	GLTextureInfo  _textures[2];
-	EAGLContext   *_context;
-	EAGLContext   *_mainContext;
-	MovieDecoder  *_decoder;
-	int            _format;
-	int            _width;
-	int            _height;
-	int            _displayWidth;
-	BOOL           _initFlag;
-	GLFBOTexture  *_fboTexture;
-	GLImageShader *_imageShader;
-	////////////////////////////
-	CVOpenGLESTextureCacheRef _textureCache;
-	CVOpenGLESTextureRef _textureRef[2];
-}
+@interface GLMovieTexture () <MovieDecoderDelegate>
 @end
 
 @implementation GLMovieTexture
@@ -77,6 +55,8 @@ typedef struct{
 
 - (void)dealloc{
 	[_decoder stop];
+	
+#if USE_GL_TEXTURE_CACHE
 	if( _textureCache ){
 		for (int i=0;i<_texNum;i++){
 			if( _textureRef[i] ){
@@ -86,6 +66,7 @@ typedef struct{
 		CVOpenGLESTextureCacheFlush(_textureCache,0);
 		CFRelease(_textureCache);
 	}
+#endif
 	
 	[_fboTexture release];
 	[_imageShader release];
@@ -136,16 +117,17 @@ typedef struct{
 		_imageShader = [[GLYUVShader alloc] init];
 	}
 	
+	_context = [[EAGLContext alloc] initWithAPI:[context API] sharegroup:[context sharegroup]];
+	
+#if	USE_GL_TEXTURE_CACHE
 	if( _textureCache ){
 		CFRelease(_textureCache);
 		_textureCache = NULL;
 	}
-	
-	_context = [[EAGLContext alloc] initWithAPI:context.API sharegroup:context.sharegroup];
-	
-	if( CVOpenGLESTextureCacheCreate && USE_GL_TEXTURE_CACHE ){
+	if( CVOpenGLESTextureCacheCreate ){
 		CVOpenGLESTextureCacheCreate(kCFAllocatorDefault,NULL, _context, NULL, &_textureCache);
 	}
+#endif
 	
 	glBindTexture(GL_TEXTURE_2D, currentTextureId);
 }
@@ -153,19 +135,6 @@ typedef struct{
 -(void)setTextureId:(uint32_t)textureId{
 	_initFlag = NO;
 	_targetTextureId = textureId;
-	if( textureId ){
-		uint32_t currentTextureId = 0;
-		glGetIntegerv(GL_TEXTURE_BINDING_2D,(int*)&currentTextureId);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-		uint8_t data[16];
-		memset(data, 0, 16);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 4, 4, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, data);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-		glBindTexture(GL_TEXTURE_2D,currentTextureId);
-	}
 }
 
 -(void)play{
@@ -211,7 +180,7 @@ typedef struct{
 	}else{
 		[self pixelTransferDefault:pixBuff];
 	}
-	//glFlush();
+	glFlush();
 	[EAGLContext setCurrentContext:_mainContext];
 }
 
@@ -219,8 +188,10 @@ typedef struct{
 	
 }
 
+
 -(void)pixelTransferWithTextureCache:(CVPixelBufferRef)pixBuff
 {
+#if USE_GL_TEXTURE_CACHE
 	BOOL firstFrame = NO;
 	if( !_initFlag ){
 		_initFlag = YES;
@@ -274,7 +245,9 @@ typedef struct{
 	[_fboTexture bind];
 	[_imageShader renderWithTexture:textureIds num:_texNum size:CGSizeMake(wr,1)];
 	[_fboTexture unbind];
+#endif
 }
+
 
 -(void)pixelTransferDefault:(CVPixelBufferRef)pixBuff
 {
@@ -323,6 +296,7 @@ typedef struct{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width>>i, _height>>i, _textures[i].format, GL_UNSIGNED_BYTE, _textures[i].data);
 		}
 	}
+	CVPixelBufferUnlockBaseAddress(pixBuff, 0);
 	
 	uint32_t textureIds[2] = {_textures[0].textureId,_textures[1].textureId};
 	float wr = (float)_width/_displayWidth;
@@ -330,7 +304,7 @@ typedef struct{
 	[_imageShader renderWithTexture:textureIds num:_texNum size:CGSizeMake(wr,1)];
 	[_fboTexture unbind];
 	glBindTexture(GL_TEXTURE_2D, 0);
-	CVPixelBufferUnlockBaseAddress(pixBuff, 0);
+	
 }
 
 -(uint32_t)createTexture{
@@ -346,5 +320,62 @@ typedef struct{
 }
 
 @end
+
+#if !(TARGET_OS_IPHONE||TARGET_IPHONE_SIMULATOR)
+
+@implementation EAGLContext
+
+-(id)init{
+	self = [super init];
+	_context = CGLGetCurrentContext();
+	if( _context ){
+		CGLRetainContext(_context);
+	}
+	return self;
+}
+
+-(id)initWithContext:(CGLContextObj)context{
+	self = [super init];
+	_context = context;
+	return self;
+}
+
+-(id)initWithAPI:(int)api sharegroup:(void*)context{
+	self = [super init];
+	CGLPixelFormatObj fmt = CGLGetPixelFormat(context);
+	CGLCreateContext(fmt, context, (CGLContextObj*)&_context);
+	return self;
+}
+
+-(int)API{
+	return 1;
+}
+
+-(void*)sharegroup{
+	return _context;
+}
+
+- (void)dealloc{
+    if( _context ){
+		CGLReleaseContext(_context);
+	}
+    [super dealloc];
+}
+
++(EAGLContext*)currentContext{
+	return [[[EAGLContext alloc] init] autorelease];
+}
+
++(void)setCurrentContext:(EAGLContext *)context{
+	if( context && context->_context ){
+		CGLSetCurrentContext(context->_context);
+	}else{
+		CGLSetCurrentContext(NULL);
+	}
+}
+
+@end
+
+#endif
 
 

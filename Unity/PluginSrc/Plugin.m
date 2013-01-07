@@ -1,16 +1,18 @@
 #import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
 #import "GLMovieTexture.h"
 
-#define EMBEDED_MOVIE_CHUNK_ID "emMv"
-
-static NSString* GetMoviePath(const char *name);
-
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #define DUMP(...) { fprintf(stderr,__VA_ARGS__); fputc('\n',stderr); }
+#else
+#define DUMP(...) NSLog(@__VA_ARGS__)
+#endif
+
 #define GetInstance(iid) ((GLMovieTexture*)(uintptr_t)(iid))
 
-uint64_t _Load(const char *name,uint32_t textureId){
-	NSString *path = GetMoviePath(name);
+static NSString* GetMoviePath(const char *name,const char *dataPath);
+
+uint64_t _Load(const char *name,uint32_t textureId,const char *dataPath){
+	NSString *path = GetMoviePath(name,dataPath);
 	if( !path ){
 		DUMP("Failed to find movie '%s'",name);
 		return 0;
@@ -18,6 +20,10 @@ uint64_t _Load(const char *name,uint32_t textureId){
 	DUMP("Load(%s,%d)",name,textureId);
 	
 	EAGLContext *context = [EAGLContext currentContext];
+	if( !context ){
+		DUMP("No GLContext binded");
+		return 0;
+	}
 	GLMovieTexture *instance = [[GLMovieTexture alloc] initWithMovie:path
 															 context:context];
 	[instance setTextureId:textureId];
@@ -46,7 +52,6 @@ void _Pause(uint64_t instanceId){
 }
 
 float _CurrentTime(uint64_t instanceId){
-	DUMP("CurrentTime(%llx)",instanceId);
 	if( instanceId==0 ){ return 0.f; }
 	GLMovieTexture *instance = GetInstance(instanceId);
 	return instance.currentTime;
@@ -79,101 +84,31 @@ uint8_t _IsPlaying(uint64_t instanceId){
 	return (uint8_t)instance.isPlaying;
 }
 
-
-//////////////////////////////////////////
-
-static int FindEmbedData(FILE *fp,const char *chunkId);
-
-static NSString* GetMoviePath(const char *name)
+static NSString* GetMoviePath(const char *name,const char *dataPath)
 {
 	NSString *moviePath = nil;
 	NSString *movieName = [NSString stringWithUTF8String:name];
 	if( [movieName hasPrefix:@"http://"] || [movieName hasPrefix:@"https://"] ){
 		return movieName;
 	}
-	NSString *basePath = [NSString stringWithFormat:@"%@/Data/Raw/%s",[[NSBundle mainBundle] resourcePath],name];
-	NSString *ext = [movieName pathExtension];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if( [ext isEqual:@""] ){
-		NSString *path = [basePath stringByAppendingPathExtension:@"mov"];
-		if( [fm fileExistsAtPath:path] ){
-			return path;
-		}
-		path = [basePath stringByAppendingPathExtension:@"m4v"];
-		if( [fm fileExistsAtPath:path] ){
-			return path;
-		}
-		path = [basePath stringByAppendingPathExtension:@"mp4"];
-		if( [fm fileExistsAtPath:path] ){
-			return path;
-		}
-		path = [basePath stringByAppendingPathExtension:@"png"];
-		if( ![fm fileExistsAtPath:path] ){
-			return nil;
-		}
-		basePath = path;
+	
+	if( dataPath ){
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+		moviePath = [NSString stringWithFormat:@"%s/Raw/%s",dataPath,name];
+#else
+		moviePath = [NSString stringWithFormat:@"%s/StreamingAssets/%s",dataPath,name];
+#endif
 	}else{
-		if( [ext caseInsensitiveCompare:@"mov"]==0 || [ext caseInsensitiveCompare:@"m4v"]==0 ||  [ext caseInsensitiveCompare:@"mp4"]==0){
-			if( [fm fileExistsAtPath:basePath] ){
-				return basePath;
-			}
-			return nil;
-		}
-		if( [ext caseInsensitiveCompare:@"png"]!=0 || ![fm fileExistsAtPath:basePath] ){
-			return nil;
-		}
-		movieName = [movieName stringByDeletingPathExtension];
+		moviePath = movieName;
 	}
-	moviePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",movieName]];
 	
-	FILE *fp = fopen([basePath UTF8String],"rb");
-	
-	int length = FindEmbedData(fp,EMBEDED_MOVIE_CHUNK_ID);
-	if( length <= 0 ){
-		return nil;
-	}
-	const int buffSize = 1024*1024;
-	void *buff = malloc(buffSize);
-	FILE *fo = fopen([moviePath UTF8String],"wb");
-	
-	while( length > 0 ) {
-		int r = 0;
-		if( buffSize < length ){
-			r = fread(buff, 1, buffSize, fp);
-		}else{
-			r = fread(buff, 1, length, fp);
+	NSString *ext = [[movieName pathExtension] lowercaseString];
+	if( [ext isEqual:@"mov"] || [ext isEqual:@"m4v"] || [ext isEqual:@"mp4"] ){
+		if( [[NSFileManager defaultManager] fileExistsAtPath:moviePath] ){
+			return moviePath;
 		}
-		if( r <= 0 ){ break; }
-		fwrite(buff, 1, r, fo);
-		length -= r;
 	}
-	fclose(fo);
-	fclose(fp);
-	free(buff);
 	
-	return moviePath;
+	return nil;
 }
 
-#define MKDW(a,b,c,d) (((a)<<24)|((b)<<16)|((c)<<8)|(d))
-#define RDDW(p) MKDW(*(p),*(p+1),*(p+2),*(p+3))
-#define IEND MKDW('I','E','N','D')
-
-static int FindEmbedData(FILE *fp,const char *chunkId)
-{
-	if( !fp ){ return 0; }
-	fseek(fp, 8, SEEK_SET);
-	uint8_t buff[8];
-	uint32_t type = 0;
-	uint32_t embid = RDDW(chunkId);
-	while(fread(buff, 8, 1, fp)==1){
-		uint32_t length = RDDW(buff);
-		type = RDDW(buff+4);
-		if( type == IEND ){
-			break;
-		}else if( type == embid ){
-			return length;
-		}
-		fseek(fp, length+4, SEEK_CUR);
-	}	
-	return 0;
-}

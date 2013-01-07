@@ -11,7 +11,11 @@ public class GLMovieTexture : MonoBehaviour
 	void Start(){
 		if( targetTexture!=null ){
 			mto = ScriptableObject.CreateInstance<GLMovieTextureObject>();
-			mto.Load(targetTexture,targetTexture.name);
+			if( !mto.Load(targetTexture,targetTexture.name) ){
+				Destroy(mto);
+				mto = null;
+				return;
+			}
 			mto.SetLoop(loop);
 			if( autoPlay ){
 				mto.Play();
@@ -19,12 +23,12 @@ public class GLMovieTexture : MonoBehaviour
 			return;
 		}
 		targetTexture = new Texture2D(1,1);
-		Debug.Log(targetTexture);
 	}
 	
 	void SetMovieFile(string movieFileName){
 		if( mto!=null ){
 			Destroy(mto);
+			mto = null;
 		}
 		mto = ScriptableObject.CreateInstance<GLMovieTextureObject>();
 		mto.Load(targetTexture,movieFileName);
@@ -37,6 +41,7 @@ public class GLMovieTexture : MonoBehaviour
 	void OnDestroy(){
 		if( mto!=null ){
 			Destroy(mto);
+			mto = null;
 		}
 	}
 	

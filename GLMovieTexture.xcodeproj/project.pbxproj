@@ -33,13 +33,33 @@
 		4A3C479216877FCC006E119A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C477F16877FCC006E119A /* main.m */; };
 		4A3C479316877FCC006E119A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C478116877FCC006E119A /* ViewController.m */; };
 		4A3C47AA16878098006E119A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A029A3A1685E2DA00761BD9 /* Foundation.framework */; };
-		4A3C4B77168780FF006E119A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B65168780FF006E119A /* Plugin.m */; };
 		4A3C4B8816878176006E119A /* GLFBOTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B7F16878176006E119A /* GLFBOTexture.m */; };
 		4A3C4B8916878176006E119A /* GLFBOTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B7F16878176006E119A /* GLFBOTexture.m */; };
 		4A3C4B8A16878176006E119A /* GLMovieTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8116878176006E119A /* GLMovieTexture.m */; };
 		4A3C4B8B16878176006E119A /* GLMovieTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8116878176006E119A /* GLMovieTexture.m */; };
 		4A3C4B8C16878176006E119A /* GLImageShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLImageShader.m */; };
 		4A3C4B8D16878176006E119A /* GLImageShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLImageShader.m */; };
+		4A49B303169AD0A600DC3553 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B302169AD0A600DC3553 /* QuartzCore.framework */; };
+		4A49B305169AD0AA00DC3553 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B304169AD0AA00DC3553 /* OpenGL.framework */; };
+		4A49B307169AD0BB00DC3553 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B306169AD0BB00DC3553 /* Cocoa.framework */; };
+		4A49B309169AD0D100DC3553 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B308169AD0D100DC3553 /* Foundation.framework */; };
+		4A49B312169AE20400DC3553 /* MovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F33168BF3FC00FC94EC /* MovieDecoder.m */; };
+		4A49B313169AF08000DC3553 /* AVAssetMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F31168BF3FC00FC94EC /* AVAssetMovieDecoder.m */; };
+		4A49B314169AF08000DC3553 /* AVPlayerMovieDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F40168C16C900FC94EC /* AVPlayerMovieDecoder.m */; };
+		4A49B315169AF08C00DC3553 /* QCStopWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F3D168C0A6600FC94EC /* QCStopWatch.m */; };
+		4A49B31A169AFA6200DC3553 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A49B318169AFA6200DC3553 /* Plugin.m */; };
+		4A49B31D169AFE1100DC3553 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A49B318169AFA6200DC3553 /* Plugin.m */; };
+		4A49B31F169B14FF00DC3553 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B31E169B14FF00DC3553 /* AVFoundation.framework */; };
+		4A49B321169B152700DC3553 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B320169B152700DC3553 /* CoreVideo.framework */; };
+		4A49B323169B152C00DC3553 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B322169B152C00DC3553 /* CoreMedia.framework */; };
+		4A49B324169B16F100DC3553 /* GLFBOTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B7F16878176006E119A /* GLFBOTexture.m */; };
+		4A49B334169B40A400DC3553 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A029A3A1685E2DA00761BD9 /* Foundation.framework */; };
+		4A49B337169B40A400DC3553 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A49B336169B40A400DC3553 /* main.m */; };
+		4A49B345169B42F400DC3553 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B344169B42F400DC3553 /* QTKit.framework */; };
+		4A49B347169B430200DC3553 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B346169B430200DC3553 /* CoreGraphics.framework */; };
+		4A49B349169B430A00DC3553 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A49B348169B430A00DC3553 /* AppKit.framework */; };
+		4A49B358169B4E6700DC3553 /* GLMovieTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8116878176006E119A /* GLMovieTexture.m */; };
+		4A49B359169B522600DC3553 /* GLImageShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C4B8316878176006E119A /* GLImageShader.m */; };
 		4A80031F1685F80F00E969C7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A80031E1685F80F00E969C7 /* OpenGLES.framework */; };
 		4A8003211685F81400E969C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8003201685F81400E969C7 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +73,15 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A49B330169B40A400DC3553 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -89,13 +118,27 @@
 		4A3C478016877FCC006E119A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4A3C478116877FCC006E119A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4A3C47A916878098006E119A /* GLMovieTexture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = GLMovieTexture.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A3C4B65168780FF006E119A /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		4A3C4B7E16878176006E119A /* GLFBOTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFBOTexture.h; sourceTree = "<group>"; };
 		4A3C4B7F16878176006E119A /* GLFBOTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLFBOTexture.m; sourceTree = "<group>"; };
 		4A3C4B8016878176006E119A /* GLMovieTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMovieTexture.h; sourceTree = "<group>"; };
 		4A3C4B8116878176006E119A /* GLMovieTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMovieTexture.m; sourceTree = "<group>"; };
 		4A3C4B8316878176006E119A /* GLImageShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLImageShader.m; sourceTree = "<group>"; };
 		4A45F53E168C57BE00569742 /* GLImageShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLImageShader.h; sourceTree = "<group>"; };
+		4A49B2DF169AC50300DC3553 /* GLMovieTexture.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GLMovieTexture.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A49B302169AD0A600DC3553 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B304169AD0AA00DC3553 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B306169AD0BB00DC3553 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B308169AD0D100DC3553 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B318169AFA6200DC3553 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
+		4A49B31E169B14FF00DC3553 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B320169B152700DC3553 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B322169B152C00DC3553 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B332169B40A400DC3553 /* movtoimg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = movtoimg; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A49B336169B40A400DC3553 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4A49B339169B40A400DC3553 /* movtoimg-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "movtoimg-Prefix.pch"; sourceTree = "<group>"; };
+		4A49B344169B42F400DC3553 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B346169B430200DC3553 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		4A49B348169B430A00DC3553 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		4A80031E1685F80F00E969C7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4A8003201685F81400E969C7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -124,6 +167,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A49B2DC169AC50300DC3553 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A49B323169B152C00DC3553 /* CoreMedia.framework in Frameworks */,
+				4A49B321169B152700DC3553 /* CoreVideo.framework in Frameworks */,
+				4A49B31F169B14FF00DC3553 /* AVFoundation.framework in Frameworks */,
+				4A49B309169AD0D100DC3553 /* Foundation.framework in Frameworks */,
+				4A49B307169AD0BB00DC3553 /* Cocoa.framework in Frameworks */,
+				4A49B305169AD0AA00DC3553 /* OpenGL.framework in Frameworks */,
+				4A49B303169AD0A600DC3553 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A49B32F169B40A400DC3553 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A49B349169B430A00DC3553 /* AppKit.framework in Frameworks */,
+				4A49B347169B430200DC3553 /* CoreGraphics.framework in Frameworks */,
+				4A49B345169B42F400DC3553 /* QTKit.framework in Frameworks */,
+				4A49B334169B40A400DC3553 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -133,7 +201,9 @@
 				4A3C475F16877FCC006E119A /* GLMovieTextureTest */,
 				4A3C47AB16878098006E119A /* GLMovieTexture */,
 				4A3C47B5168780FE006E119A /* Unity */,
+				4A49B335169B40A400DC3553 /* movtoimg */,
 				4A029A371685E2DA00761BD9 /* Frameworks */,
+				4A49B2F3169AC59900DC3553 /* FrameworksOSX */,
 				4A029A351685E2DA00761BD9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,6 +213,8 @@
 			children = (
 				4A029A341685E2DA00761BD9 /* GLMovieTextureTest.app */,
 				4A3C47A916878098006E119A /* GLMovieTexture.a */,
+				4A49B2DF169AC50300DC3553 /* GLMovieTexture.bundle */,
+				4A49B332169B40A400DC3553 /* movtoimg */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,9 +321,44 @@
 		4A3C4B64168780FF006E119A /* PluginSrc */ = {
 			isa = PBXGroup;
 			children = (
-				4A3C4B65168780FF006E119A /* Plugin.m */,
+				4A49B318169AFA6200DC3553 /* Plugin.m */,
 			);
 			path = PluginSrc;
+			sourceTree = "<group>";
+		};
+		4A49B2F3169AC59900DC3553 /* FrameworksOSX */ = {
+			isa = PBXGroup;
+			children = (
+				4A49B348169B430A00DC3553 /* AppKit.framework */,
+				4A49B346169B430200DC3553 /* CoreGraphics.framework */,
+				4A49B344169B42F400DC3553 /* QTKit.framework */,
+				4A49B322169B152C00DC3553 /* CoreMedia.framework */,
+				4A49B320169B152700DC3553 /* CoreVideo.framework */,
+				4A49B31E169B14FF00DC3553 /* AVFoundation.framework */,
+				4A49B308169AD0D100DC3553 /* Foundation.framework */,
+				4A49B306169AD0BB00DC3553 /* Cocoa.framework */,
+				4A49B304169AD0AA00DC3553 /* OpenGL.framework */,
+				4A49B302169AD0A600DC3553 /* QuartzCore.framework */,
+			);
+			name = FrameworksOSX;
+			path = Unity;
+			sourceTree = "<group>";
+		};
+		4A49B335169B40A400DC3553 /* movtoimg */ = {
+			isa = PBXGroup;
+			children = (
+				4A49B336169B40A400DC3553 /* main.m */,
+				4A49B338169B40A400DC3553 /* Supporting Files */,
+			);
+			path = movtoimg;
+			sourceTree = "<group>";
+		};
+		4A49B338169B40A400DC3553 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A49B339169B40A400DC3553 /* movtoimg-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +399,42 @@
 			productReference = 4A3C47A916878098006E119A /* GLMovieTexture.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		4A49B2DE169AC50300DC3553 /* GLMovieTextureOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A49B2ED169AC50300DC3553 /* Build configuration list for PBXNativeTarget "GLMovieTextureOSX" */;
+			buildPhases = (
+				4A49B2DB169AC50300DC3553 /* Sources */,
+				4A49B2DC169AC50300DC3553 /* Frameworks */,
+				4A49B2DD169AC50300DC3553 /* Resources */,
+				4A49B301169ACC5200DC3553 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GLMovieTextureOSX;
+			productName = GLMovieTextureOSX;
+			productReference = 4A49B2DF169AC50300DC3553 /* GLMovieTexture.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		4A49B331169B40A400DC3553 /* movtoimg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A49B33C169B40A400DC3553 /* Build configuration list for PBXNativeTarget "movtoimg" */;
+			buildPhases = (
+				4A49B32E169B40A400DC3553 /* Sources */,
+				4A49B32F169B40A400DC3553 /* Frameworks */,
+				4A49B330169B40A400DC3553 /* CopyFiles */,
+				4A49B343169B428100DC3553 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = movtoimg;
+			productName = movtoimg;
+			productReference = 4A49B332169B40A400DC3553 /* movtoimg */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -315,6 +458,8 @@
 			targets = (
 				4A029A331685E2DA00761BD9 /* GLMovieTextureTest */,
 				4A3C47A816878098006E119A /* GLMovieTexture */,
+				4A49B2DE169AC50300DC3553 /* GLMovieTextureOSX */,
+				4A49B331169B40A400DC3553 /* movtoimg */,
 			);
 		};
 /* End PBXProject section */
@@ -333,6 +478,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A49B2DD169AC50300DC3553 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -347,7 +499,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLUGIN_DIR=\"$PROJECT_DIR/Unity/MovieTexture/Assets/Plugins/iOS/\"\ncp \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" $PLUGIN_DIR";
+			shellScript = "cp \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$UNITY_PROJECT_DIR/Assets/Plugins/iOS/\"";
+			showEnvVarsInLog = 0;
+		};
+		4A49B301169ACC5200DC3553 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$UNITY_PROJECT_DIR/Assets/Plugins/\"";
+			showEnvVarsInLog = 0;
+		};
+		4A49B343169B428100DC3553 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$UNITY_PROJECT_DIR/Assets/Plugins/Editor/\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -376,7 +556,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A3C4B77168780FF006E119A /* Plugin.m in Sources */,
 				4A3C4B8916878176006E119A /* GLFBOTexture.m in Sources */,
 				4A3C4B8B16878176006E119A /* GLMovieTexture.m in Sources */,
 				4A3C4B8D16878176006E119A /* GLImageShader.m in Sources */,
@@ -384,6 +563,30 @@
 				4A363F37168BF3FC00FC94EC /* MovieDecoder.m in Sources */,
 				4A363F3F168C0A6700FC94EC /* QCStopWatch.m in Sources */,
 				4A363F42168C16C900FC94EC /* AVPlayerMovieDecoder.m in Sources */,
+				4A49B31A169AFA6200DC3553 /* Plugin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A49B2DB169AC50300DC3553 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A49B312169AE20400DC3553 /* MovieDecoder.m in Sources */,
+				4A49B313169AF08000DC3553 /* AVAssetMovieDecoder.m in Sources */,
+				4A49B314169AF08000DC3553 /* AVPlayerMovieDecoder.m in Sources */,
+				4A49B315169AF08C00DC3553 /* QCStopWatch.m in Sources */,
+				4A49B31D169AFE1100DC3553 /* Plugin.m in Sources */,
+				4A49B324169B16F100DC3553 /* GLFBOTexture.m in Sources */,
+				4A49B358169B4E6700DC3553 /* GLMovieTexture.m in Sources */,
+				4A49B359169B522600DC3553 /* GLImageShader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A49B32E169B40A400DC3553 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A49B337169B40A400DC3553 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +636,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				UNITY_PROJECT_DIR = $PROJECT_DIR/Unity/MovieTexture;
 			};
 			name = Debug;
 		};
@@ -453,6 +657,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				UNITY_PROJECT_DIR = $PROJECT_DIR/Unity/MovieTexture;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -508,6 +713,88 @@
 			};
 			name = Release;
 		};
+		4A49B2EE169AC50300DC3553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unity/PluginSrc/OSX/GLMovieTextureOSX-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "Unity/PluginSrc/OSX/GLMovieTextureOSX-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = GLMovieTexture;
+				SDKROOT = macosx;
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4A49B2EF169AC50300DC3553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unity/PluginSrc/OSX/GLMovieTextureOSX-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "Unity/PluginSrc/OSX/GLMovieTextureOSX-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = GLMovieTexture;
+				SDKROOT = macosx;
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		4A49B33D169B40A400DC3553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "movtoimg/movtoimg-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4A49B33E169B40A400DC3553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EFFECTIVE_PLATFORM_NAME = "-iphoneos";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "movtoimg/movtoimg-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -534,6 +821,24 @@
 			buildConfigurations = (
 				4A3C47B316878098006E119A /* Debug */,
 				4A3C47B416878098006E119A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A49B2ED169AC50300DC3553 /* Build configuration list for PBXNativeTarget "GLMovieTextureOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A49B2EE169AC50300DC3553 /* Debug */,
+				4A49B2EF169AC50300DC3553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A49B33C169B40A400DC3553 /* Build configuration list for PBXNativeTarget "movtoimg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A49B33D169B40A400DC3553 /* Debug */,
+				4A49B33E169B40A400DC3553 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

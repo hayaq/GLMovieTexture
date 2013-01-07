@@ -7,7 +7,13 @@ public class GLMovieTextureObject : ScriptableObject
 	ulong instanceId;
 	
 	public bool Load(Texture2D texture,string movieFileName){
-		instanceId = _Load(movieFileName,(uint)texture.GetNativeTextureID());
+		uint textureId = (uint)texture.GetNativeTextureID();
+		if( textureId == 0 ){ return false; }
+		string dataPath = Application.dataPath;
+#if !UNITY_EDITOR && UNITY_STANDALONE_OSX
+		dataPath += "/Data";
+#endif
+		instanceId = _Load(movieFileName,textureId,dataPath);
 		return ( instanceId != 0 );
 	}
 	
@@ -36,9 +42,9 @@ public class GLMovieTextureObject : ScriptableObject
 	void OnDestroy(){
 		Unload();
 	}
-
+	
 #if (UNITY_IPHONE && !UNITY_EDITOR)
-	[DllImport ("__Internal")] private static extern ulong _Load(string name,uint textureId);
+	[DllImport ("__Internal")] private static extern ulong _Load(string name,uint textureId,string dataPath);
 	[DllImport ("__Internal")] private static extern void  _Unload(ulong instanceId);
 	[DllImport ("__Internal")] private static extern void  _Play(ulong instanceId);
 	[DllImport ("__Internal")] private static extern void  _Pause(ulong instanceId);
@@ -47,8 +53,18 @@ public class GLMovieTextureObject : ScriptableObject
 	[DllImport ("__Internal")] private static extern bool  _Loop(ulong instanceId);
 	[DllImport ("__Internal")] private static extern void  _SetLoop(ulong instanceId,bool loop);
 	[DllImport ("__Internal")] private static extern bool  _IsPlaying(ulong instanceId);
+#elif (UNITY_EDITOR||UNITY_STANDALONE_OSX)
+	[DllImport ("GLMovieTexture")] private static extern ulong _Load(string name,uint textureId,string dataPath);
+	[DllImport ("GLMovieTexture")] private static extern void  _Unload(ulong instanceId);
+	[DllImport ("GLMovieTexture")] private static extern void  _Play(ulong instanceId);
+	[DllImport ("GLMovieTexture")] private static extern void  _Pause(ulong instanceId);
+	[DllImport ("GLMovieTexture")] private static extern float _CurrentTime(ulong instanceId);
+	[DllImport ("GLMovieTexture")] private static extern void  _SetCurrentTime(ulong instanceId,float t);
+	[DllImport ("GLMovieTexture")] private static extern bool  _Loop(ulong instanceId);
+	[DllImport ("GLMovieTexture")] private static extern void  _SetLoop(ulong instanceId,bool loop);
+	[DllImport ("GLMovieTexture")] private static extern bool  _IsPlaying(ulong instanceId);
 #else
-	private static ulong _Load(string name,uint textureId){ return 0; }
+	private static ulong _Load(string name,uint textureId,string dataPath){ return 0; }
 	private static void  _Unload(ulong instanceId){}
 	private static void  _Play(ulong instanceId){}
 	private static void  _Pause(ulong instanceId){}

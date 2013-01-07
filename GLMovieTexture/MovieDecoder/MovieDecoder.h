@@ -18,9 +18,10 @@
 -(void)movieDecoderDidFinishDecoding:(MovieDecoder*)decoder;
 @end
 
-@interface MovieDecoder : NSObject
-@property (nonatomic,readonly) int    width, height, displayWidth;
-@property (nonatomic,readonly) BOOL   isRunning,isFinished;
+@interface MovieDecoder : NSObject{
+	struct MovieDecoderData *_data;
+}
+@property (nonatomic,readonly) BOOL   isRunning, isFinished;
 @property (nonatomic,assign)   int    format;
 @property (nonatomic,assign)   int    frameRate;
 @property (nonatomic,assign)   double currentTime;

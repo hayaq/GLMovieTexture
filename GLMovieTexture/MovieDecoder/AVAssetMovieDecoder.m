@@ -1,20 +1,17 @@
 #import "MovieDecoder.h"
 #import "MovieDecoderInternal.h"
 
-@interface AVAssetMovieDecoder (){
-	AVAsset    *_asset;
-	AVAssetReader *_assetReader;
-	AVAssetReaderTrackOutput *_assetReaderOutput;
-}
-@end
-
 @implementation AVAssetMovieDecoder
+
++(BOOL)isAvailable{
+	return YES;
+}
 
 -(BOOL)loadMovie:(NSString*)path
 {
-	[_lock lock];
+	[_data->_lock lock];
 	if( _assetReader ){
-		[_lock unlock];
+		[_data->_lock unlock];
 		return FALSE;
 	}
 	[_asset release];
@@ -25,24 +22,23 @@
 	}else{
 		_asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:path] options:nil];
 	}
-	_width = _displayWidth = _height = 0;
-	[_lock unlock];
+	[_data->_lock unlock];
 	return TRUE;
 }
 
 -(void)dealloc{
-	[_lock lock];
+	[_data->_lock lock];
 	[_asset release];
 	[_assetReader release];
 	[_assetReaderOutput release];
-	[_lock unlock];
+	[_data->_lock unlock];
 	[super dealloc];
 }
 
 -(void)initReader{
 	[self releaseReader];
 	AVAssetTrack *track = [[_asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-	NSDictionary *setting = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_format]
+	NSDictionary *setting = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_data->_format]
 														forKey:(id)@"PixelFormatType"];	
 	_assetReaderOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track outputSettings:setting];
 	
@@ -52,7 +48,7 @@
 	}
 	_assetReader = [[AVAssetReader alloc] initWithAsset:_asset error:nil];
 	[_assetReader addOutput:_assetReaderOutput];
-	CMTime tm = CMTimeMake((int64_t)(_currentTime*30000), 30000);
+	CMTime tm = CMTimeMake((int64_t)(_data->_currentTime*30000), 30000);
 	[_assetReader setTimeRange:CMTimeRangeMake(tm,_asset.duration)];
 	[_assetReader startReading];
 }
@@ -76,26 +72,26 @@
 {
 	if( _assetReader.status != AVAssetReaderStatusReading ){
 		if( _assetReader.status == AVAssetReaderStatusCompleted ){
-			if( !_loop ){
-				[_timer invalidate];
-				_timer = nil;
-				_resetFlag = YES;
-				[_delegate movieDecoderDidFinishDecoding:self];
-				_currentTime = 0;
+			if( !_data->_loop ){
+				[_data->_timer invalidate];
+				_data->_timer = nil;
+				_data->_resetFlag = YES;
+				[_data->_delegate movieDecoderDidFinishDecoding:self];
+				_data->_currentTime = 0;
 				[self releaseReader];
 				return;
 			}else{
-				[_delegate movieDecoderDidFinishDecoding:self];
-				_currentTime = 0;
+				[_data->_delegate movieDecoderDidFinishDecoding:self];
+				_data->_currentTime = 0;
 				[self initReader];
 			}
 		}
 	}
 	CMSampleBufferRef sampleBuffer = [_assetReaderOutput copyNextSampleBuffer];
 	if( !sampleBuffer ){ return; }
-	_currentTime = CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer));
+	_data->_currentTime = CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer));
 	CVPixelBufferRef pixBuff = CMSampleBufferGetImageBuffer(sampleBuffer);
-	[_delegate movieDecoderDidDecodeFrame:self pixelBuffer:pixBuff];
+	[_data->_delegate movieDecoderDidDecodeFrame:self pixelBuffer:pixBuff];
 	CVPixelBufferRelease(pixBuff);
 	CMSampleBufferInvalidate(sampleBuffer);
 }
@@ -105,5 +101,4 @@
 }
 
 @end
-
 

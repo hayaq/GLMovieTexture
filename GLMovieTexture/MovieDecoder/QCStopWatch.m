@@ -11,15 +11,6 @@
 
 static inline uint64_t QCGetCurrentTime();
 
-@interface QCStopWatch () {
-@public
-	uint64_t _time0;
-	uint64_t _sumt;
-	int _count;
-	int _sampleCount;
-}
-@end
-
 @implementation QCStopWatch
 
 +(id)stopWatchWithSampleCount:(int)sampleCount{

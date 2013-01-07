@@ -1,15 +1,14 @@
-
 #import <AVFoundation/AVFoundation.h>
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#define MOVIE_DECODER_TARGET_IOS 1
 #import <AssetsLibrary/AssetsLibrary.h>
+#else
+#define MOVIE_DECODER_TARGET_OSX 1
+#endif
 #import "QCStopWatch.h"
 
-@protocol MovieDecoderDelegate;
-
-@interface MovieDecoder(){
-@public
-	int       _width;
-	int       _height;
-	int       _displayWidth;
+typedef struct MovieDecoderData{
 	int       _frameRate;
 	int       _format;
 	double    _currentTime;
@@ -23,14 +22,28 @@
 	QCStopWatch *_stopWatch;
 	////////////////////////
 	id<MovieDecoderDelegate> _delegate;
+}MovieDecoderData;
+
+@class AVAsset;
+@class AVAssetReader;
+@class AVAssetReaderTrackOutput;
+
+// iOS4, iOS5, OSX
+@interface AVAssetMovieDecoder : MovieDecoder{
+	AVAsset    *_asset;
+	AVAssetReader *_assetReader;
+	AVAssetReaderTrackOutput *_assetReaderOutput;
 }
++(BOOL)isAvailable;
 @end
 
-// iOS4, iOS5
-@interface AVAssetMovieDecoder : MovieDecoder
-@end
+@class AVPlayer;
+@class AVPlayerItemVideoOutput;
 
 // For iOS6 or later
-@interface AVPlayerMovieDecoder : MovieDecoder
+@interface AVPlayerMovieDecoder : MovieDecoder{
+	AVPlayer *_player;
+	AVPlayerItemVideoOutput *_output;
+}
 +(BOOL)isAvailable;
 @end

@@ -1,16 +1,11 @@
 #import "GLFBOTexture.h"
-#import <QuartzCore/QuartzCore.h>
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-
-@interface GLFBOTexture(){
-	uint32_t _fboId;
-	uint32_t _textureId;
-	int      _width;
-	int      _height;
-	uint32_t _selfAllocatedTextureId;
-}
-@end
+#import <QuartzCore/QuartzCore.h>
+#elif TARGET_OS_MAC
+#import <OpenGL/gl.h>
+#endif
 
 @implementation GLFBOTexture
 
@@ -82,7 +77,7 @@
 -(void)bind{
 	glBindFramebuffer(GL_FRAMEBUFFER, _fboId);
     glViewport(0, 0, _width, _height);
-    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

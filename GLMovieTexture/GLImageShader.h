@@ -9,7 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface GLImageShader : NSObject
+@interface GLImageShader : NSObject{
+	uint32_t _programId;
+	int      _position;
+	int      _texcoord;
+	int      _scale;
+	int      _texNum;
+	int      _textures[16];
+}
 -(void)renderWithTexture:(uint32_t)textureIds;
 -(void)renderWithTexture:(uint32_t*)textureIds num:(int)num size:(CGSize)size;
 @end

@@ -16,8 +16,11 @@ public class Behaviour2 : MonoBehaviour {
 		int bh = bw/2;
 		int by = Screen.height-bh;
 		if( GUI.Button(new Rect(0,by,bw,bh),"Local") ){
+			// Load local movie. 
+			// This movie path should be specified as relative path from 'StreamingAssets'. 
 			LoadMovieTexture("Movie2.m4v");
 		}else if( GUI.Button(new Rect(bw,by,bw,bh),"Streaming") ){
+			// Load remote movie
 			LoadMovieTexture("http://github.id0.jp/GLMovieTexture/Movie.m4v");
 		}else if( GUI.Button(new Rect(2*bw,by,bw,bh),"Delete") ){
 			if( _mto != null ){
@@ -32,7 +35,7 @@ public class Behaviour2 : MonoBehaviour {
 			Destroy(_mto);
 			_mto = null;	
 		}
-		
+		// Create an empty texture for MovieTexture
 		Texture2D texture = new Texture2D(1,1,TextureFormat.ARGB32, false);
 		_mto = ScriptableObject.CreateInstance<GLMovieTextureObject>();
 		_mto.Load(texture,moviePath);
